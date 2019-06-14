@@ -1,0 +1,10 @@
+{
+    "garageDoor":{
+        "host":"192.168.1.19",
+        "port":"9999",
+        "displayName":"Garage Door",
+        "outputPins":[13],
+        "inputPins":[2],
+        "analogPins":[5]
+    }
+}
