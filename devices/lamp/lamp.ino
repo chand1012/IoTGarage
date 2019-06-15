@@ -3,7 +3,8 @@
 const char *ssid = "";     
 const char *password = ""; 
 
-int lampPin = 2;
+int lampState = 0;
+const int lampPin = 2;
 WiFiServer server(80);
 
 void setup()
@@ -11,7 +12,7 @@ void setup()
   Serial.begin(115200);
   delay(10);
   pinMode(lampPin, OUTPUT);
-  digitalWrite(lampPin, LOW);
+  digitalWrite(lampPin, lampState);
   // Connect to WiFi network
 
   Serial.print("Connecting to ");
@@ -37,6 +38,15 @@ void setup()
   Serial.println("/");
 }
 
+void toggleLamp(){
+    if (lampState==0){
+        lampState = 1;
+    } else {
+        lampState = 0;
+    }
+    digitalWrite(lampPin, lampState);
+}
+
 void loop()
 {
   // Check if a client has connected
@@ -60,12 +70,10 @@ void loop()
 
   // Match the request
 
-  if (request.indexOf("/lampOn") != -1)
-  {
-    digitalWrite(lampPin, HIGH);
-  } else if (request.indexOf("/lampOff") != -1) {
-    digitalWrite(lampPin, LOW);
-  }
+  if (request.indexOf("/toggleLamp") != -1)
+ {
+    toggleLamp();
+ }
 
   // Return the response
   client.println("HTTP/1.1 200 OK");

@@ -12,7 +12,7 @@
         "port":80,
         "displayName":"Chandler's Lamp",
         "commands":{
-            "lampSwitch":"Toggle Lamp"
+            "toggleLamp":"Toggle Lamp"
         }
     }
 }

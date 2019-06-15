@@ -25,8 +25,12 @@ def index(): # this will be the remote page for if I cannot access the alexas
 
 @app.route("/<string:device>/<string:command>")
 def devicehandler(device, command):
-    recv = sendCommand(device, command)
-    return Response(status=recv)
+    d = DEVICES[device]
+    if not command in d["commands"]:
+        return Response(status=404)
+    else:
+        recv = sendCommand(device, command)
+        return Response(status=recv)
 
 if __name__=='__main__':
     app.run(host='0.0.0.0', port=55555, debug=True)

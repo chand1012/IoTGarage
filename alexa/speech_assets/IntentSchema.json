@@ -1,0 +1,54 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "eye oh tee",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "OpenGarageDoor",
+                    "slots": [],
+                    "samples": [
+                        "open the garage door",
+                        "close the garage door",
+                        "close door",
+                        "close garage door",
+                        "open door",
+                        "open garage door"
+                    ]
+                },
+                {
+                    "name": "toggleLamp",
+                    "slots": [],
+                    "samples": [
+                        "turn chandlers lamp off",
+                        "turn the lamp off",
+                        "turn lamp off",
+                        "turn lamp on",
+                        "turn chandlers lamp on",
+                        "turn the lamp on"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}

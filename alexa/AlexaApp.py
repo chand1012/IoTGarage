@@ -9,6 +9,7 @@ from flask_ask import Ask, question, request, session, statement
 HOST = os.environ["HOST"]
 PORT = os.environ["PORT"]
 URL = "http://{}:{}".format(HOST, PORT)
+
 app = Flask(__name__)
 ask = Ask(app, "/")
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
@@ -21,7 +22,19 @@ def launch():
 def open_garage_door():
     recv = requests.get(URL + "/garageDoor/toggleGarage")
     if recv.status_code==200:
-        output = render_template("success")
+        output = render_template("garagesuccess")
+        title = render_template("title")
+        return statement(output).simple_card(title, output)
+    else:
+        output = render_template("failure")
+        title = render_template("title")
+        return statement(output).simple_card(title, output)
+
+@ask.intent("toggleLamp")
+def toggle_lamp():
+    recv = requests.get(URL + "/chandlerLamp/lampSwitch")
+    if recv.status==200:
+        output = render_template("lampsuccess")
         title = render_template("title")
         return statement(output).simple_card(title, output)
     else:
