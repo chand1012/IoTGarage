@@ -1,0 +1,3 @@
+success: Opening garage door.
+failure: Something went wrong, please check that the device is connected to the internet.
+title: Chandler IoT

@@ -1,0 +1,10 @@
+{
+    "intents":[
+        {
+            "intent":"OpenGarageDoor"
+        },
+        {
+            "intent":"ToggleLamp"
+        }
+    ]
+}

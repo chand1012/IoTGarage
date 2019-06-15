@@ -1,0 +1,41 @@
+import logging
+import os
+
+import requests
+from flask import Flask, render_template
+
+from flask_ask import Ask, question, request, session, statement
+
+HOST = os.environ["HOST"]
+PORT = os.environ["PORT"]
+URL = "http://{}:{}".format(HOST, PORT)
+app = Flask(__name__)
+ask = Ask(app, "/")
+logging.getLogger("flask_ask").setLevel(logging.DEBUG)
+
+@ask.launch
+def launch():
+    return open_garage_door()
+
+@ask.intent("OpenGarageDoor")
+def open_garage_door():
+    recv = requests.get(URL + "/garageDoor/toggleGarage")
+    if recv.status_code==200:
+        output = render_template("success")
+        title = render_template("title")
+        return statement(output).simple_card(title, output)
+    else:
+        output = render_template("failure")
+        title = render_template("title")
+        return statement(output).simple_card(title, output)
+
+@ask.session_ended
+def session_ended():
+    return "{}", 200
+
+if __name__ == '__main__':
+    if 'ASK_VERIFY_REQUESTS' in os.environ:
+        verify = str(os.environ.get('ASK_VERIFY_REQUESTS', '')).lower()
+        if verify == 'false':
+            app.config['ASK_VERIFY_REQUESTS'] = False
+    app.run(debug=True)

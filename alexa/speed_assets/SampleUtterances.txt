@@ -1,0 +1,6 @@
+OpenGarageDoor open door
+OpenGarageDoor close door
+OpenGarageDoor open garage door
+OpenGarageDoor close garage door
+ToggleLamp turn off lamp
+ToggleLamp turn on lamp
