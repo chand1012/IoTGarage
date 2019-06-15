@@ -21,7 +21,7 @@ def sendCommand(device, command):
 
 @app.route("/", methods = ["GET"])
 def index(): # this will be the remote page for if I cannot access the alexas
-    return render_template("index.html")
+    return render_template("index.html", devices=DEVICES, rawdevices=json.dumps(DEVICES))
 
 @app.route("/<string:device>/<string:command>")
 def devicehandler(device, command):

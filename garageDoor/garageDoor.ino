@@ -8,7 +8,7 @@ WiFiServer server(80);
 
 void setup()
 {
-    Serial.begin(115200);
+  Serial.begin(115200);
   delay(10);
   pinMode(doorpin, OUTPUT);
   digitalWrite(doorpin, LOW);

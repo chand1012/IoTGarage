@@ -2,11 +2,17 @@
     "garageDoor":{
         "host":"192.168.1.26",
         "port":80,
-        "displayName":"Garage Door"
+        "displayName":"Garage Door",
+        "commands":{
+            "toggleGarage":"Garage Door Button"
+        }
     },
     "chandlerLamp":{
         "host":"192.168.1.15",
         "port":80,
-        "displayName":"Chandler's Lamp"
+        "displayName":"Chandler's Lamp",
+        "commands":{
+            "lampSwitch":"Toggle Lamp"
+        }
     }
 }
