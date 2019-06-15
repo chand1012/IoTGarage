@@ -1,7 +1,3 @@
-# IoTGarageDoor
+# IoTGarage
 
-https://www.amazon.com/Gikfun-Sensor-Magnetic-Switch-Arduino/dp/B0154PTDFI?ref_=fsclp_pl_dp_1
-
-https://www.instructables.com/id/Magnetic-Door-Sensor-and-Arduino/
-
-https://techtutorialsx.com/2017/11/13/esp32-arduino-setting-a-socket-server/
+This is my project for connecting various devices in my home to a self hosted and homemade IoT server that is also Alexa Enabled. The `flaskRouter` directory runs on a Raspberry Pi, the `alexa` directory runs on an AWS Lambda function, and the `devices` directory is the code for all of the devices that I connect to the network, all of which so far have been [NodeMCU](https://smile.amazon.com/gp/product/B01IK9GEQG/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&psc=1)s programmed with the Arduino IDE.
