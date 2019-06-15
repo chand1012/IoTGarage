@@ -51,4 +51,4 @@ if __name__ == '__main__':
         verify = str(os.environ.get('ASK_VERIFY_REQUESTS', '')).lower()
         if verify == 'false':
             app.config['ASK_VERIFY_REQUESTS'] = False
-    app.run(host="0.0.0.", port=12420,debug=True)
+    app.run(host="0.0.0.0", port=12420,debug=True)
