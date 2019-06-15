@@ -1,19 +1,6 @@
-from flask import Flask, Response, request
+from flask import Flask, Response, request, render_template
 import json
-import socket
-
-def getDigitalPins(device):
-    s = socket.socket()
-    host = device["host"]
-    port = device["port"]
-    s.connect((host, port))
-    s.send("outputs")
-    data = s.recv(len(device["outputPins"]))
-    rdata = {}
-    count = 0
-    for k in device["outputPins"]:
-        rdata[str(k)] = int(list(data)[count])
-        
+import requests
 
 app = Flask(__name__)
 
@@ -22,11 +9,24 @@ with open("devices.json") as f:
     rawjson = f.read()
     DEVICES = json.loads(rawjson)
 
-@app.route("/", methods = ["GET"])
-def index():
-    return "Main Page"
+def sendCommand(device, command):
+    d = DEVICES[device]
+    host = d["host"]
+    port = ""
+    if int(d["port"])!=80 or d["port"]!=None:
+        port = d["port"]
+    url = "http://{}:{}/{}".format(host, port, command)
+    recv = requests.get(url)
+    return recv.status_code
 
-@app.route("<string:device>", methods = ["POST", "GET"])
-def devicehandler(deviceName):
-    if request.method == "GET":
-        
+@app.route("/", methods = ["GET"])
+def index(): # this will be the remote page for if I cannot access the alexas
+    return render_template("index.html")
+
+@app.route("/<string:device>/<string:command>")
+def devicehandler(device, command):
+    recv = sendCommand(device, command)
+    return Response(status=recv)
+
+if __name__=='__main__':
+    app.run(host='0.0.0.0', port=55555, debug=True)

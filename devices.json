@@ -1,10 +1,12 @@
 {
     "garageDoor":{
-        "host":"192.168.1.19",
-        "port":"9999",
-        "displayName":"Garage Door",
-        "outputPins":[13],
-        "inputPins":[2],
-        "analogPins":[5]
+        "host":"192.168.1.26",
+        "port":80,
+        "displayName":"Garage Door"
+    },
+    "chandlerLamp":{
+        "host":"192.168.1.15",
+        "port":80,
+        "displayName":"Chandler's Lamp"
     }
 }
