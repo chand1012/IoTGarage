@@ -1,4 +1,4 @@
-from flask import Flask, Response, request, render_template
+from flask import Flask, Response, render_template
 import json
 import requests
 
@@ -19,7 +19,7 @@ def sendCommand(device, command):
     recv = requests.get(url)
     return recv.status_code
 
-@app.route("/", methods = ["GET"])
+@app.route("/")
 def index(): # this will be the remote page for if I cannot access the alexas
     return render_template("index.html", devices=DEVICES, rawdevices=json.dumps(DEVICES))
 
