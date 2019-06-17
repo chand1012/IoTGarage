@@ -42,6 +42,18 @@ def toggle_lamp():
         title = render_template("title")
         return statement(output).simple_card(title, output)
 
+@ask.intent("doAThing")
+def do_a_thing():
+    recv = requests.get(URL + "/chandlerLamp/lampSwitch")
+    if recv.status==200:
+        output = render_template("testdevice")
+        title = render_template("title")
+        return statement(output).simple_card(title, output)
+    else:
+        output = render_template("failure")
+        title = render_template("title")
+        return statement(output).simple_card(title, output)
+
 @ask.session_ended
 def session_ended():
     return "{}", 200

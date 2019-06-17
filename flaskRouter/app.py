@@ -20,7 +20,7 @@ def sendCommand(device, command):
     try:
         recv = requests.get(url, timeout=3)
     except:
-        return 404
+        return 500
     else:
         return recv.status_code
 

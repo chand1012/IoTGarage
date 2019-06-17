@@ -2,3 +2,4 @@ garagesuccess: Cycling garage door.
 failure: Something went wrong, please check that the device is connected to the internet.
 title: Chandler IoT
 lampsuccess: Cycling lamp state.
+testdevice: Did nothing successfully.
