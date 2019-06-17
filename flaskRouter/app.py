@@ -16,8 +16,13 @@ def sendCommand(device, command):
     if int(d["port"])!=80 or d["port"]!=None:
         port = d["port"]
     url = "http://{}:{}/{}".format(host, port, command)
-    recv = requests.get(url)
-    return recv.status_code
+    recv = None
+    try:
+        recv = requests.get(url, timeout=3)
+    except:
+        return 404
+    else:
+        return recv.status_code
 
 @app.route("/")
 def index(): # this will be the remote page for if I cannot access the alexas
