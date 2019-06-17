@@ -9,5 +9,9 @@ app = Flask(__name__)
 def doAThing():
     return Response(status=200)
 
+@app.route("/doAThingWrong")
+def doAThingWrong():
+    return Response(status=404)
+
 if __name__=="__main__":
     app.run(host="127.0.0.1", port=5000, debug=True)

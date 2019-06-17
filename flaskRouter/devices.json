@@ -14,5 +14,13 @@
         "commands":{
             "toggleLamp":"Toggle Lamp"
         }
+    },
+    "testDevice":{
+        "host":"127.0.0.1",
+        "port":5000,
+        "displayName":"Test Device",
+        "commands":{
+            "doAThing":"Do a thing."
+        }
     }
 }
