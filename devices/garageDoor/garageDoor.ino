@@ -3,6 +3,12 @@
 const char *ssid = "";     
 const char *password = ""; 
 
+const int trigPin = 0; // D3
+const int echoPin = 4; // D2
+String output = "";
+String dist;
+long duration;
+int distance;
 int doorpin = 2;
 WiFiServer server(80);
 
@@ -10,6 +16,8 @@ void setup()
 {
   Serial.begin(115200);
   delay(10);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
   pinMode(doorpin, OUTPUT);
   digitalWrite(doorpin, LOW);
   // Connect to WiFi network
@@ -37,12 +45,31 @@ void setup()
   Serial.println("/");
 }
 
+void uDist()
+{
+  // Clears the trigPin
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+
+  // Sets the trigPin on HIGH state for 10 micro seconds
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Reads the echoPin, returns the sound wave travel time in microseconds
+  duration = pulseIn(echoPin, HIGH);
+
+  // Calculating the distance
+  distance= duration*0.034/2;
+}
+
 void toggleGarage()
 {
   digitalWrite(doorpin, HIGH);
   delay(500);
   digitalWrite(doorpin, LOW);
 }
+
 
 void loop()
 {
@@ -70,6 +97,15 @@ void loop()
   if (request.indexOf("/toggleGarage") != -1)
   {
     toggleGarage();
+    output = "";
+  } else if (request.indexOf("/getGarage") != -1 ) {
+    uDist();
+    dist = String(distance);
+    if (distance >= 10){
+      output = "Garage door is closed.";
+    } else {
+      output = "Garage door is open.";
+    }
   }
 
   // Return the response
@@ -78,7 +114,9 @@ void loop()
   client.println(""); //  do not forget this one
   client.println("<!DOCTYPE HTML>");
   client.println("<html>");
-
+  client.println(output);
+  client.println("\n");
+  client.println(dist);
   client.println("</html>");
 
   delay(1);
