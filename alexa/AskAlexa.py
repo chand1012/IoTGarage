@@ -44,7 +44,7 @@ def toggle_lamp():
 
 @ask.intent("doAThing")
 def do_a_thing():
-    recv = requests.get(URL + "/chandlerLamp/lampSwitch")
+    recv = requests.get(URL + "/testDevice/doAThing")
     if recv.status==200:
         output = render_template("testdevice")
         title = render_template("title")
@@ -63,4 +63,4 @@ if __name__ == '__main__':
         verify = str(os.environ.get('ASK_VERIFY_REQUESTS', '')).lower()
         if verify == 'false':
             app.config['ASK_VERIFY_REQUESTS'] = False
-    app.run(host="0.0.0.0", port=12420,debug=True)
+    app.run(host="0.0.0.0", port=12420, debug=True)
