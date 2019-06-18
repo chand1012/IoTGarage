@@ -35,7 +35,7 @@ def open_garage_door():
 def toggle_lamp():
     recv = requests.get(URL + "/chandlerLamp/lampSwitch")
     print(recv.status_code)
-    if recv.status==200:
+    if recv.status_code==200:
         output = render_template("lampsuccess")
         title = render_template("title")
         return statement(output).simple_card(title, output)
@@ -48,7 +48,7 @@ def toggle_lamp():
 def do_a_thing():
     recv = requests.get(URL + "/testDevice/doAThing")
     print(recv.status_code)
-    if recv.status==200:
+    if recv.status_code==200:
         output = render_template("testdevice")
         title = render_template("title")
         return statement(output).simple_card(title, output)
