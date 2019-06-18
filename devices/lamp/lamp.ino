@@ -70,7 +70,7 @@ void loop()
 
   // Match the request
 
-  if (request.indexOf("/toggleLamp") != -1)
+  if (request.indexOf("/lampSwitch") != -1)
  {
     toggleLamp();
  }
