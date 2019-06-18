@@ -12,7 +12,7 @@ URL = "http://{}:{}".format(HOST, PORT)
 
 app = Flask(__name__)
 ask = Ask(app, "/")
-logging.getLogger("flask_ask").setLevel(logging.DEBUG)
+logging.getLogger("flask_ask").setLevel(logging.INFO)
 
 @ask.launch
 def launch():
@@ -21,6 +21,7 @@ def launch():
 @ask.intent("OpenGarageDoor")
 def open_garage_door():
     recv = requests.get(URL + "/garageDoor/toggleGarage")
+    print(recv.status_code)
     if recv.status_code==200:
         output = render_template("garagesuccess")
         title = render_template("title")
@@ -33,6 +34,7 @@ def open_garage_door():
 @ask.intent("toggleLamp")
 def toggle_lamp():
     recv = requests.get(URL + "/chandlerLamp/lampSwitch")
+    print(recv.status_code)
     if recv.status==200:
         output = render_template("lampsuccess")
         title = render_template("title")
@@ -45,6 +47,7 @@ def toggle_lamp():
 @ask.intent("doAThing")
 def do_a_thing():
     recv = requests.get(URL + "/testDevice/doAThing")
+    print(recv.status_code)
     if recv.status==200:
         output = render_template("testdevice")
         title = render_template("title")
