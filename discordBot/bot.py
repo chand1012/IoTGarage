@@ -52,6 +52,20 @@ async def on_message(message):
             await message.channel.send(content="Did nothing successfully!")
         else:
             await message.channel.send(content="Failed to do nothing! Error code {}.".format(req.status_code))
+        return
+
+    if message.content.lower().startswith("!garagestatus"):
+        req = requests.post(URL + "/garageDoor/getGarage")
+        if req.status_code == 200:
+            if "open" in req.text:
+                await message.channel.send(content="Garage Door is open.")
+            elif "closed" in req.text:
+                await message.channel.send(content="Garage Door is closed.")
+            return
+        else:
+            msg = "There was an error with your request: server returned code {}.".format(req.status_code)
+            await message.channel.send(content=msg)
+            return
 
 @client.event # the on_ready event
 async def on_ready():

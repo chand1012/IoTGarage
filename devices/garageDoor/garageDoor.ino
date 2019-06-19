@@ -98,7 +98,7 @@ void loop()
   {
     toggleGarage();
     output = "";
-  } else if (request.indexOf("/getGarage") != -1 ) {
+  } else if (request.indexOf("/getGarage") != -1) {
     uDist();
     dist = String(distance);
     if (distance >= 10){

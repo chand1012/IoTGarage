@@ -21,9 +21,25 @@ def launch():
 @ask.intent("OpenGarageDoor")
 def open_garage_door():
     recv = requests.get(URL + "/garageDoor/toggleGarage")
-    print(recv.status_code)
     if recv.status_code==200:
         output = render_template("garagesuccess")
+        title = render_template("title")
+        return statement(output).simple_card(title, output)
+    else:
+        output = render_template("failure")
+        title = render_template("title")
+        return statement(output).simple_card(title, output)
+
+@ask.intent("GetGarageDoor")
+def get_garage_door():
+    recv = requests.post(URL + "/garageDoor/getGarage")
+    if recv.status_code==200:
+        state = ""
+        if "open" in recv.text:
+            state = "open"
+        elif "closed" in recv.text:
+            state = "closed"
+        output = render_template(state)
         title = render_template("title")
         return statement(output).simple_card(title, output)
     else:
@@ -34,7 +50,6 @@ def open_garage_door():
 @ask.intent("toggleLamp")
 def toggle_lamp():
     recv = requests.get(URL + "/chandlerLamp/lampSwitch")
-    print(recv.status_code)
     if recv.status_code==200:
         output = render_template("lampsuccess")
         title = render_template("title")
@@ -47,7 +62,6 @@ def toggle_lamp():
 @ask.intent("doAThing")
 def do_a_thing():
     recv = requests.get(URL + "/testDevice/doAThing")
-    print(recv.status_code)
     if recv.status_code==200:
         output = render_template("testdevice")
         title = render_template("title")
