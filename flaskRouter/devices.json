@@ -21,7 +21,9 @@
         "port":5000,
         "displayName":"Test Device",
         "commands":{
-            "doAThing":"Do a thing."
+            "doAThing":"Do a thing.",
+            "doAThingWrong": "Do a thing wrong.",
+            "getAThing":"Get a thing."
         }
     }
 }

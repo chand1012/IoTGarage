@@ -1,5 +1,8 @@
 garagesuccess: Cycling garage door.
+open: Garage door is open.
+closed: Garage door is closed.
 failure: Something went wrong, please check that the device is connected to the internet.
 title: IoT Garage
 lampsuccess: Cycling lamp state.
 testdevice: Did nothing successfully.
+getTest: Got nothing successfully.

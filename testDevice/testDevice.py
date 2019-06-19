@@ -9,6 +9,10 @@ app = Flask(__name__)
 def doAThing():
     return Response(status=200)
 
+@app.route("/returnAThing")
+def returnAThing():
+    return "<html> This is a thing </html>"
+
 @app.route("/doAThingWrong")
 def doAThingWrong():
     return Response(status=404)

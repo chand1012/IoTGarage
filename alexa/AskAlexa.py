@@ -71,6 +71,18 @@ def do_a_thing():
         title = render_template("title")
         return statement(output).simple_card(title, output)
 
+@ask.intent("getAThing")
+def get_a_thing():
+    recv = requests.post("/testDevice/getAThing")
+    if recv.status_code==200:
+        output = render_template("getTest")
+        title = render_template("title")
+        return statement(output).simple_card(title, output)
+    else:
+        output = render_template("failure")
+        title = render_template("title")
+        return statement(output).simple_card(title, output)
+
 @ask.session_ended
 def session_ended():
     return "{}", 200
