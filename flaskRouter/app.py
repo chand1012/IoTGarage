@@ -49,7 +49,7 @@ def devicehandler(device, command):
             return Response(status=404)
         else:
             recv = sendCommand(device, command, 1)
-            Response(recv.text, status=200)
+            return Response(recv.text, status=200)
 
 
 if __name__=='__main__':

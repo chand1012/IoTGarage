@@ -1,5 +1,6 @@
 import discord
 import requests
+from bs4 import BeautifulSoup
 
 from json_extract import json_extract
 
@@ -9,12 +10,13 @@ URL = "http://{}:{}".format(HOST, PORT)
 token = json_extract("token")
 me = json_extract("admin")
 client = discord.Client()
-meDiscord = client.get_user_info(me)
+
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
-    if message.author != meDiscord:
+    if not me in str(message.author):
+        print(message.author)
         return
     if message.content.lower().startswith("!opengaragedoor") or message.content.lower().startswith("!closegaragedoor"):
         req = requests.get(URL + "/garageDoor/toggleGarage")
@@ -46,7 +48,7 @@ async def on_message(message):
             await message.channel.send(content=msg)
             return
     
-    if message.content.lower().startswith("!doAThing"):
+    if message.content.lower().startswith("!doathing"):
         req = requests.get(URL + "/testDevice/doAThing")
         if req.status_code==200:
             await message.channel.send(content="Did nothing successfully!")
@@ -54,13 +56,20 @@ async def on_message(message):
             await message.channel.send(content="Failed to do nothing! Error code {}.".format(req.status_code))
         return
 
+    if message.content.lower().startswith("!getathing"):
+        req = requests.post(URL + "/testDevice/getAThing")
+        if req.status_code==200:
+            page = BeautifulSoup(req.content, "html.parser")
+            await message.channel.send(content=page.p.text)
+        else:
+            await message.channel.send(content="Failed to get nothing! Error code {}.".format(req.status_code))
+
     if message.content.lower().startswith("!garagestatus"):
         req = requests.post(URL + "/garageDoor/getGarage")
         if req.status_code == 200:
-            if "open" in req.text:
-                await message.channel.send(content="Garage Door is open.")
-            elif "closed" in req.text:
-                await message.channel.send(content="Garage Door is closed.")
+            page = BeautifulSoup(req.content, "html.parser")
+            msg = page.h1.text + "\n" + page.p.text
+            await message.channel.send(content=msg)
             return
         else:
             msg = "There was an error with your request: server returned code {}.".format(req.status_code)
@@ -69,18 +78,9 @@ async def on_message(message):
 
 @client.event # the on_ready event
 async def on_ready():
-	print('Logged in as')
-	print(client.user.name)
-	print(client.user.id)
-	print('------')
+    print('Logged in as')
+    print(client.user.name)
+    print(client.user.id)
+    print('------')
 
-while True: # run the bot forever
-	try:
-		client.run(token) # the bot run command
-	except Exception as e: # kill it if a keyboard interrupt is invoked
-		if "Event loop" in str(e):
-			print("\nStopping bot....")
-			break
-		else:
-			print(e)
-			continue
+client.run(token)

@@ -102,9 +102,9 @@ void loop()
     uDist();
     dist = String(distance);
     if (distance >= 10){
-      output = "Garage door is closed.";
+      output = "<h1>Garage door is closed.</h1>";
     } else {
-      output = "Garage door is open.";
+      output = "<h1>Garage door is open.</h1>";
     }
   }
 
@@ -116,7 +116,7 @@ void loop()
   client.println("<html>");
   client.println(output);
   client.println("\n");
-  client.println(dist);
+  client.println("<p>Distance from sensor: " + dist + "</p>");
   client.println("</html>");
 
   delay(1);

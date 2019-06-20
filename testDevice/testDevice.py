@@ -1,7 +1,7 @@
 # this is a test device that returns 200s and other responses for 
 # nothing other than testing purposes
 
-from flask import Flask, Response
+from flask import Flask, Response, render_template
 
 app = Flask(__name__)
 
@@ -9,9 +9,9 @@ app = Flask(__name__)
 def doAThing():
     return Response(status=200)
 
-@app.route("/returnAThing")
+@app.route("/getAThing")
 def returnAThing():
-    return "<html> This is a thing </html>"
+    return render_template("index.html")
 
 @app.route("/doAThingWrong")
 def doAThingWrong():
