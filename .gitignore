@@ -4,6 +4,7 @@ alexa/ngrok
 alexa/venv/
 alexa/*.zip
 alexa/*.pem
+*/build/*
 discordBot/data.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
