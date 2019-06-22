@@ -25,5 +25,12 @@
             "doAThingWrong": "Do a thing wrong.",
             "getAThing":"Get a thing."
         }
+    },
+    "motionSensor1":{
+        "webhook": "",
+        "data":{
+            "username":"MotionSensor1",
+            "content":"Motion has been detected!"
+        }
     }
 }

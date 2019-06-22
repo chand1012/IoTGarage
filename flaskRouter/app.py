@@ -35,8 +35,8 @@ def index():
     return redirect("https://blog.chand1012.net/")
 
 @app.route("/<string:device>/<string:command>", methods=["POST", "GET"])
-def devicehandler(device, command):
-    if request.method=="GET":
+def devicehandler(device, command): # these devices require you to make a request first
+    if request.method=="GET":# swap GET and POST at some point
         d = DEVICES[device]
         if not command in d["commands"]:
             return Response(status=404)
@@ -51,6 +51,13 @@ def devicehandler(device, command):
             recv = sendCommand(device, command, 1)
             return Response(recv.text, status=200)
 
+@app.route("/Webhook/<string:device>")
+def webhook(device):# these send the request rather than recieving one
+    d = DEVICES[device]
+    hook = d["webhook"]
+    payload = d["data"]
+    recv = requests.post(hook, data=json.dumps(payload), headers={"Content-Type": "application/json"})
+    return Response(status=recv.status_code)
 
 if __name__=='__main__':
     app.run(host='0.0.0.0', port=55555, debug=True)
