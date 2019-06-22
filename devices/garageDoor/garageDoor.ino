@@ -66,7 +66,7 @@ void uDist()
 void toggleGarage()
 {
   digitalWrite(doorpin, HIGH);
-  delay(500);
+  delay(350);
   digitalWrite(doorpin, LOW);
 }
 
