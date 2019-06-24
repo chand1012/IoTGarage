@@ -1,17 +1,14 @@
 #include <ESP8266WiFi.h>
-#include <WiFiClient.h>
 
 const char* ssid = "";
 const char* password = "";
 IPAddress host(192, 168, 1, 2);
+//const char* host = "http://192.168.1.2";
 const int ledPin = 8; // this will change
 const int sensorPin = 2;
 
 unsigned long timeout = 0;
-
 int val = LOW;
-
-WifiClient client;
 
 void setup() {
     Serial.begin(9600);
@@ -34,6 +31,7 @@ void loop() {
         if (timeout <= millis()) {
             timeout = millis() + 5000;
             Serial.printf("Sending request to server...");
+            WiFiClient client;
             if (client.connect(host, 55555)) {
                 client.print(String("GET /motionSensor/webhook") + " HTTP/1.1\r\n" +
                  "Host: " + host + "\r\n" +
