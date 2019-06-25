@@ -3,12 +3,11 @@
 const char* ssid = "";
 const char* password = "";
 //IPAddress host(192, 168, 1, 2);
-const char* host = "192.168.1.2";
+const char* host = "http://192.168.1.2";
 const int ledPin = 8; // this will change
 const int sensorPin = 2;
-
 unsigned long timeout = 0;
-
+char newline = '\n';
 int val = LOW;
 
 void setup() {
@@ -17,10 +16,10 @@ void setup() {
     pinMode(ledPin, OUTPUT);
     pinMode(sensorPin, INPUT);
     Serial.printf("Connecting to %s", ssid);
-    Wifi.begin(ssid, password);
-    while (Wifi.status != WL_CONNECTED) {
+    WiFi.begin(ssid, password);
+    while (WiFi.status() != WL_CONNECTED) {
         delay(500);
-        Serial.println(".")
+        Serial.println(".");
     }
     Serial.println("Connected");
 }
@@ -32,6 +31,7 @@ void loop() {
         if (timeout <= millis()) {
             timeout = millis() + 5000;
             Serial.printf("Sending request to server...");
+            WiFiClient client;
             if (client.connect(host, 55555)) {
                 client.print(String("GET /motionSensor/webhook") + " HTTP/1.1\r\n" +
                  "Host: " + host + "\r\n" +
@@ -39,7 +39,7 @@ void loop() {
                  "\r\n");
                 while (client.connected() || client.available()){
                     if (client.available()) {
-                        String line = client.readStringUntil("\n");
+                        String line = client.readStringUntil(newline);
                         Serial.println(line);
                     }
                 }
