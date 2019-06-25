@@ -1,17 +1,15 @@
 #include <ESP8266WiFi.h>
-#include <WiFiClient.h>
 
 const char* ssid = "";
 const char* password = "";
-IPAddress host(192, 168, 1, 2);
+//IPAddress host(192, 168, 1, 2);
+const char* host = "192.168.1.2";
 const int ledPin = 8; // this will change
 const int sensorPin = 2;
 
 unsigned long timeout = 0;
 
 int val = LOW;
-
-WifiClient client;
 
 void setup() {
     Serial.begin(9600);
