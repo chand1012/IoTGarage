@@ -32,7 +32,7 @@ def sendCommand(device, command, resp=0):
 
 @app.route("/")
 def index(): 
-    return redirect("https://blog.chand1012.net/")
+    return redirect("https://chand1012.github.io/")
 
 @app.route("/<string:device>/<string:command>", methods=["POST", "GET"])
 def devicehandler(device, command): # these devices require you to make a request first
