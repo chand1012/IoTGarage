@@ -1,5 +1,8 @@
 #include <ESP8266WiFi.h>
 
+const int doortrig = 1023;
+const int lighttrig = 512;
+
 const char *ssid = "";     
 const char *password = ""; 
 
@@ -65,11 +68,17 @@ void uDist()
 
 void toggleGarage()
 {
-  digitalWrite(doorpin, HIGH);
+  analogWrite(doorpin, doortrig);
   delay(350);
-  digitalWrite(doorpin, LOW);
+  analogWrite(doorpin, doortrig);
 }
 
+void toggleGarageLight() 
+{
+  analogWrite(doorpin, lighttrig);
+  delay(350);
+  analogWrite(doorpin, lighttrig);
+}
 
 void loop()
 {
