@@ -1,17 +1,19 @@
 #include <ESP8266WiFi.h>
-
+// this is on a webmos uno-style ESP8266
+// so my PIR sensor is fucked so this is unused for now
+// also the webmos is being fucky about this code specifically
 const char* ssid = "";
 const char* password = "";
 //IPAddress host(192, 168, 1, 2);
-const char* host = "http://192.168.1.2";
-const int ledPin = 8; // this will change
-const int sensorPin = 2;
+const char* host = "http://192.168.1.29";
+const int ledPin = 11; // this will change
+const int sensorPin = 0;
 unsigned long timeout = 0;
 char newline = '\n';
 int val = LOW;
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
     Serial.println();
     pinMode(ledPin, OUTPUT);
     pinMode(sensorPin, INPUT);

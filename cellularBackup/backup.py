@@ -32,5 +32,4 @@ while True:
             requests.get("http://localhost:55555/garageDoor/toggleGarage")
         elif "lamp" in sms.message.lower():
             requests.get("http://localhost:55555/chandlerLamp/lampSwitch")
-    else:
-        pass 
+    
